@@ -18,36 +18,66 @@
             return array[random];
             }
 
-            /* Use a Do-While to Prompt user for either "Rock", "Paper", or
-            "Scissors"; if user input is not those words,keep prompting.*/
-            const computerSelection = getComputerChoice();
+            let computerSelection;
             let playerSelection;
-            do {
-                playerSelection = prompt("Rock, Paper, Scissors, shoot!").toLocaleLowerCase();
-            } while (playerSelection !== rock && playerSelection !== paper && playerSelection !== scissors);
             
-            /* Define function taking the user input and computer random choice,
+            /* Define function taking the user input and computer's random choice,
             as arguments.*/
+            let playerScore = 0;
+            let computerScore = 0;
+
             function playRound(playerSelection, computerSelection) {
+                do {
+                    playerSelection = prompt("Rock, Paper, Scissors, shoot!").toLowerCase();
+                } while (playerSelection !== rock && playerSelection !== paper && playerSelection !== scissors);
+
+                computerSelection = getComputerChoice();
+
                 if ((playerSelection === rock) && (computerSelection === scissors)) {
-                    return alert("You Win! Rock beats Scissors");
+                    return playerScore = 1;
                 } else if ((playerSelection === scissors) && (computerSelection === paper)) {
-                    return alert("You Win! Scissors beats Paper");
+                    return playerScore = 1;
                 } else if ((playerSelection === paper) && (computerSelection === rock)) {
-                    return alert("You Win! Paper beats Rock");
+                    return playerScore = 1;
                 } else if ((playerSelection === rock) && (computerSelection === paper)) {
-                    return alert("You Lose! Paper beats Rock");
+                    return computerScore = 1;
                 } else if ((playerSelection === paper) && (computerSelection === scissors)) {
-                    return alert("You Lose! Scissors beats paper");
+                    return computerScore = 1;
                 } else if ((playerSelection === scissors) && (computerSelection === rock)) {
-                    return alert("You Lose! Rock beats Scissors");
+                    return computerScore = 1;
                 } else {
-                    return alert("It's a Tie!");
+                    return playerScore;
+                    return computerScore;
                 }
             }
 
-            console.log(playRound(playerSelection, computerSelection));
+            /* Define a function game(). Do a loop calling the playRound function
+            5 times. For each loop, tally playerScore and computerScore*/
+            function game() {
+                let finalPlayerScore = 0
+                let finalComputerScore = 0
 
+                for (let i = 1; i <= 5; i++) {
+                    playRound(playerSelection, computerSelection);
+                    if (playerScore === 1) {
+                        finalPlayerScore = finalPlayerScore + playerScore;
+                        console.log(`You win in round ${i}!`);
+                    } else if (computerScore === 1) {
+                        finalComputerScore = finalComputerScore + computerScore;
+                        console.log(`You lose in round ${i}!`);
+                    } else if ((playerScore === 0) && (computerScore === 0)) {
+                        console.log(`You tie in round ${i}!`);
+                    }
+                }
+                
+                if (finalPlayerScore > finalComputerScore) {
+                    console.log(`You Win! Your score: ${finalPlayerScore} / 5. Computer score: ${finalComputerScore} / 5.`);
+                } else if (finalPlayerScore < finalComputerScore) {
+                    console.log(`You Lose! Your score: ${finalPlayerScore} / 5. Computer score: ${finalComputerScore} / 5.`);
+                } else if (finalPlayerScore === finalComputerScore) {
+                    console.log(`It's a Tie! Your score: ${finalPlayerScore} / 5. Computer score: ${finalComputerScore} / 5.`)
+                }
+            } console.log(game());
 
         </script>
     </body>
