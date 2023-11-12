@@ -23,9 +23,6 @@
             
             /* Define function taking the user input and computer's random choice,
             as arguments.*/
-            let playerScore = 0;
-            let computerScore = 0;
-
             function playRound(playerSelection, computerSelection) {
                 do {
                     playerSelection = prompt("Rock, Paper, Scissors, shoot!").toLowerCase();
@@ -34,38 +31,38 @@
                 computerSelection = getComputerChoice();
 
                 if ((playerSelection === rock) && (computerSelection === scissors)) {
-                    return playerScore = 1;
+                    return "player";
                 } else if ((playerSelection === scissors) && (computerSelection === paper)) {
-                    return playerScore = 1;
+                    return "player";
                 } else if ((playerSelection === paper) && (computerSelection === rock)) {
-                    return playerScore = 1;
+                    return "player";
                 } else if ((playerSelection === rock) && (computerSelection === paper)) {
-                    return computerScore = 1;
+                    return "computer";
                 } else if ((playerSelection === paper) && (computerSelection === scissors)) {
-                    return computerScore = 1;
+                    return "computer";
                 } else if ((playerSelection === scissors) && (computerSelection === rock)) {
-                    return computerScore = 1;
-                } else {
-                    return playerScore;
-                    return computerScore;
+                    return "computer";
+                } else if (playerSelection === computerSelection) {
+                    return "tie";
                 }
             }
 
             /* Define a function game(). Do a loop calling the playRound function
-            5 times. For each loop, tally playerScore and computerScore*/
+            5 times. For each loop, tally finalPlayerScore and finalComputerScore*/
             function game() {
                 let finalPlayerScore = 0
                 let finalComputerScore = 0
 
                 for (let i = 1; i <= 5; i++) {
-                    playRound(playerSelection, computerSelection);
-                    if (playerScore === 1) {
-                        finalPlayerScore = finalPlayerScore + playerScore;
+                    let roundResult = playRound(playerSelection, computerSelection)
+
+                    if (roundResult === "player") {
+                        finalPlayerScore++;
                         console.log(`You win in round ${i}!`);
-                    } else if (computerScore === 1) {
-                        finalComputerScore = finalComputerScore + computerScore;
+                    } else if (roundResult === "computer") {
+                        finalComputerScore++;
                         console.log(`You lose in round ${i}!`);
-                    } else if ((playerScore === 0) && (computerScore === 0)) {
+                    } else if (roundResult === "tie") {
                         console.log(`You tie in round ${i}!`);
                     }
                 }
